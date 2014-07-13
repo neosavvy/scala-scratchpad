@@ -42,5 +42,21 @@ class Problems {
     reverseWithAcc( list, List() )
   }
 
+  /**
+   * Find out if a list is a palindrome
+   */
+  def isPalindrome[A]( list : List[A] ) : Boolean = {
+    if( list == Nil || list.length == 1) {
+      return true;
+    }
+
+    if( list.head == list.last ) {
+      isPalindrome( list.take( list.length - 1 ).tail )
+    } else {
+      false
+    }
+
+  }
+
 
 }

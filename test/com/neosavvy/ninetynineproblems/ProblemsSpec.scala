@@ -53,5 +53,16 @@ class ProblemsSpec extends Specification {
     }
   }
 
+  "The function isPalindrome" should {
+    "return the true or false if the input array is a palindrome" in {
+      val p = new Problems()
+      p.isPalindrome(List()) must beTrue
+      p.isPalindrome(List(1)) must beTrue
+      p.isPalindrome(List(1, 2, 1)) must beTrue
+      p.isPalindrome(List(1, 2, 3)) must beFalse
+      p.isPalindrome(List(1, 2, 5, 2, 1)) must beTrue
+      p.isPalindrome(List(1, 2, 5, 7, 5, 2, 1)) must beTrue
+    }
+  }
 
 }
