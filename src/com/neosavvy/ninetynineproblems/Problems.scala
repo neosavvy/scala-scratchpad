@@ -23,11 +23,24 @@ class Problems {
   /**
    * Find the number of elements of a list.
    */
-  def length[A]( list : List[A] ) : Int = lengthWithAcc( list, 0 )
-
-  def lengthWithAcc[A]( list : List[A], acc : Int ) : Int = list match {
-    case Nil => acc
-    case h :: Nil => acc + 1
-    case _ :: tail => lengthWithAcc( tail, acc + 1 )
+  def length[A]( list : List[A] ) : Int = {
+    def lengthWithAcc[A]( list : List[A], acc : Int ) : Int = list match {
+      case Nil => acc
+      case _ :: tail => lengthWithAcc( tail, acc + 1 )
+    }
+    lengthWithAcc( list, 0 )
   }
+
+  /**
+   * Reverse a list.
+   */
+  def reverse[A]( list : List[A] ) : List[A] = {
+    def reverseWithAcc[A]( ls : List[A], reversed : List[A] ) : List[A] = ls match {
+      case Nil => reversed
+      case _ :: tail => reverseWithAcc( tail ,  List[A](ls.head) ::: reversed )
+    }
+    reverseWithAcc( list, List() )
+  }
+
+
 }
