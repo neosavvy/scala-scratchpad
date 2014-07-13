@@ -37,7 +37,7 @@ class Problems {
   def reverse[A]( list : List[A] ) : List[A] = {
     def reverseWithAcc[A]( ls : List[A], reversed : List[A] ) : List[A] = ls match {
       case Nil => reversed
-      case _ :: tail => reverseWithAcc( tail ,  List[A](ls.head) ::: reversed )
+      case h :: tail => reverseWithAcc( tail ,  h :: reversed )
     }
     reverseWithAcc( list, List() )
   }
