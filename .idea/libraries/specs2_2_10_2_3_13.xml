@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="specs2_2.10-2.3.13">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/specs2_2.10-2.3.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/scalaz-concurrent_2.10-7.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/scalaz-core_2.10-7.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
