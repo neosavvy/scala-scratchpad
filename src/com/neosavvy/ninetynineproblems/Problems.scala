@@ -1,6 +1,8 @@
 package com.neosavvy.ninetynineproblems
 
 /**
+ * My attempt at solving 99 scala problems: http://aperiodic.net/phil/scala/s-99/
+ *
  * Created by aparrish on 7/12/14.
  */
 object Problems {
