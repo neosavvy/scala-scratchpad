@@ -3,7 +3,7 @@ package com.neosavvy.ninetynineproblems
 /**
  * Created by aparrish on 7/12/14.
  */
-class Problems {
+object Problems {
 
   /**
    * Find the last element of a list.
@@ -56,6 +56,12 @@ class Problems {
       false
     }
 
+  }
+
+  def flatten(l: List[_]): List[Any] = l match {
+    case Nil => Nil
+    case (head: List[_]) :: tail => flatten(head) ::: flatten(tail)
+    case head :: tail => head :: flatten(tail)
   }
 
 
