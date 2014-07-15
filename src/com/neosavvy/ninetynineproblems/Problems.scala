@@ -66,5 +66,23 @@ object Problems {
     case head :: tail => head :: flatten(tail)
   }
 
+  /**
+   * Eliminate consecutive duplicates of list elements.
+   */
+  def compress[T]( l : List[T] ) : List[T] = {
+    def compressStep( remaining : List[T], prev : Option[T], result : List[T] ) : List[T] = remaining match {
+      case Nil => result
+      case head :: tail => {
+        val p = prev.getOrElse(None)
+        if( p == head ) {
+          compressStep(tail, Some(head), result )
+        }
+        else {
+          compressStep(tail, Some(head), head :: result )
+        }
+      }
+    }
+    compressStep( l, None, List())
+  }
 
 }
