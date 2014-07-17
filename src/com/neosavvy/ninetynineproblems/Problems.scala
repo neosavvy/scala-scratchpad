@@ -71,7 +71,7 @@ object Problems {
    */
   def compress[T]( l : List[T] ) : List[T] = {
     def compressStep( remaining : List[T], prev : Option[T], result : List[T] ) : List[T] = remaining match {
-      case Nil => result
+      case Nil => result reverse
       case head :: tail => {
         val p = prev.getOrElse(None)
         if( p == head ) {
@@ -85,4 +85,42 @@ object Problems {
     compressStep( l, None, List())
   }
 
+  /**
+   * Pack consecutive duplicates of list elements into sublists.
+   */
+  def eliminateDupes[T]( l : List[T] ) : Any = {
+    val m = scala.collection.mutable.Map[T, List[T]]()
+    def f( x : T ) = {
+      if( m.contains(x) )
+       m.put(x, x :: m(x))
+      else
+        m.put(x, x :: Nil)
+    }
+    l map ( f(_) )
+    m.values
+  }
+
+  /**
+   * Takes a list of symbols and makes sublists out of the identical values
+   */
+  def pack[T]( l : List[T] ) : List[List[T]] = {
+    def packStep[T]( remaining : List[T], result : List[List[T]], prev : Option[T], currentStep : List[T] ) : List[List[T]] = remaining match {
+      case Nil => {
+        currentStep :: result reverse
+      }
+      case head :: tail => {
+        val p = prev.getOrElse(None)
+        if( p == head ) {
+          packStep(tail, result, Some(head), head :: currentStep)
+        } else {
+          currentStep match {
+            case Nil =>packStep(tail, result, Some(head), head :: Nil )
+            case _ =>packStep(tail, currentStep :: result, Some(head), head :: Nil )
+          }
+        }
+      }
+    }
+
+    packStep( l, Nil, None, Nil)
+  }
 }
