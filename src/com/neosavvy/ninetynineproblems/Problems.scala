@@ -124,6 +124,9 @@ object Problems {
     packStep( l, Nil, None, Nil)
   }
 
+  /**
+   * Use the result of problem P09 to implement the so-called run-length encoding data compression method. Consecutive duplicates of elements are encoded as tuples (N, E) where N is the number of duplicates of the element E.
+   */
   def encode[T]( l : List[T] ) : List[(Int, T)] = {
     def encodeStep[T]( remaining : List[List[T]], result : List[(Int, T)] ) : List[(Int, T)] = remaining match {
       case Nil => result reverse
@@ -135,5 +138,42 @@ object Problems {
     }
 
     encodeStep( pack(l), Nil)
+  }
+
+  /**
+   * Modify the result of problem P10 in such a way that if an element has no duplicates it is simply copied into the result list. Only elements with duplicates are transferred as (N, E) terms.
+   */
+  def encodeModified[T]( l : List[T] ) : List[Any] = {
+    def encodeStep[T]( remaining : List[List[T]], result : List[Any] ) : List[Any] = remaining match {
+      case Nil => result reverse
+      case head :: tail => {
+        if( head.length > 1 )
+          encodeStep( tail, ( head.length, head(0)) :: result)
+        else
+          encodeStep( tail, head(0) :: result)
+      }
+    }
+
+    encodeStep( pack(l), Nil)
+  }
+
+  def decode[T]( l : List[(Int, T)] ) : List[Any] = {
+    def decodeTuple[T]( num : Int, symbol : T, result : List[T] ) : List[Any] = {
+      if( num == 0 ) result
+      else decodeTuple( num - 1, symbol, symbol :: result)
+    }
+
+    def decodeStep[T]( remaining : List[(Int, T)], result : List[T] ) : List[Any] = remaining match {
+
+      case Nil => {
+        result reverse
+      }
+      case head :: tail => {
+        decodeStep( tail, decodeTuple( head._1, head._2, Nil ) ++ result )
+      }
+
+    }
+
+    decodeStep[T]( l, List[T]())
   }
 }
