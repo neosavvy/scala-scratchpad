@@ -78,4 +78,10 @@ class ProblemsSpec extends Specification {
     }
 
   }
+
+  "The function encode" should {
+    "return a list of tuples where each tuple is a number of occurrances and the symbol as (num, symbol)" in {
+      encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must be equalTo List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
+    }
+  }
 }

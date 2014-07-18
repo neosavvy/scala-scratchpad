@@ -123,4 +123,17 @@ object Problems {
 
     packStep( l, Nil, None, Nil)
   }
+
+  def encode[T]( l : List[T] ) : List[(Int, T)] = {
+    def encodeStep[T]( remaining : List[List[T]], result : List[(Int, T)] ) : List[(Int, T)] = remaining match {
+      case Nil => result reverse
+      case head :: tail => {
+        val tuple = ( head.length, head(0))
+        val step =  tuple :: result
+        encodeStep( tail, step )
+      }
+    }
+
+    encodeStep( pack(l), Nil)
+  }
 }
